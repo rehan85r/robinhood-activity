@@ -1,60 +1,69 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robinhood Activity</title>
+    <title>Robinhood Chain Activity</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body><nav class="navbar">
-    <div class="logo">
-        <div class="logo-icon">R</div>
-        <span>Robinhood Activity</span>
-    </div>
-    <div class="chain-name">Robinhood Chain</div>
-</nav>
+<body>
 
-<main class="hero">
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
 
-    <div class="badge">
-        <span class="dot"></span>
-        On-chain activity tracker
-    </div>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="robinhood-logo.png" alt="Robinhood Logo">
+            <span>Robinhood Chain Activity</span>
+        </div>
 
-    <h1>
-        Your on-chain<br>
-        <span>journey, visualized.</span>
-    </h1>
+        <div class="chain-name">Robinhood Chain</div>
+    </nav>
 
-    <p>
-        Discover your Robinhood Chain activity, streaks,
-        transactions, and wallet milestones.
-    </p>
+    <main class="hero">
 
-    <div class="wallet-box">
-        <input 
-            type="text" 
-            id="walletInput"
-            placeholder="Paste your EVM wallet address"
-        >
+        <div class="badge">
+            <span class="dot"></span>
+            On-chain activity tracker
+        </div>
 
-        <button onclick="checkActivity()">
-            Check Activity →
-        </button>
-    </div>
+        <h1>
+            Check Your Robinhood<br>
+            <span>On-Chain Activity.</span>
+        </h1>
 
-    <div id="error" class="error"></div>
+        <p>
+            Explore your transactions, streaks, milestones,
+            and journey across Robinhood Chain.
+        </p>
 
-    <small>
-        Your wallet address is used only to fetch public blockchain data.
-    </small>
+        <div class="wallet-box">
 
-</main>
+            <input 
+                type="text" 
+                id="walletInput"
+                placeholder="Paste your EVM wallet address"
+            >
 
-<footer>
-    Built for the Robinhood Chain community
-</footer>
+            <button onclick="checkActivity()">
+                Check Activity →
+            </button>
 
-<script src="script.js"></script>
+        </div>
+
+        <div id="error" class="error"></div>
+
+        <small>
+            Your wallet address is used only to fetch public blockchain data.
+        </small>
+
+    </main>
+
+    <footer>
+        Built for the Robinhood Chain community
+    </footer>
+
+    <script src="script.js"></script>
 
 </body>
 </html>
