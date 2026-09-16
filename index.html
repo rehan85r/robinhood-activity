@@ -6,7 +6,453 @@
 
     <title>Robinhood Chain Activity</title>
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+            color: #111111;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            height: 82px;
+            border-bottom: 1px solid #eeeeee;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .brand img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .network {
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .hero {
+            min-height: 650px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: rgba(31, 181, 146, 0.13);
+            filter: blur(100px);
+            border-radius: 50%;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+        }
+
+        .eyebrow {
+            font-size: 12px;
+            letter-spacing: 4px;
+            color: #1fb592;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: clamp(42px, 6vw, 76px);
+            line-height: 1.04;
+            letter-spacing: -3px;
+            font-weight: 700;
+            max-width: 900px;
+        }
+
+        h1 span {
+            color: #111111;
+        }
+
+        .subtitle {
+            margin-top: 28px;
+            color: #777777;
+            font-size: 17px;
+            line-height: 1.6;
+            max-width: 650px;
+        }
+
+        #walletForm {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 38px;
+            width: 100%;
+            max-width: 700px;
+            align-items: center;
+        }
+
+        #walletAddress {
+            width: 100%;
+            height: 70px;
+            border: 1px solid #dddddd;
+            border-radius: 16px;
+            padding: 0 22px;
+            font-size: 16px;
+            outline: none;
+            background: #ffffff;
+            color: #111111;
+            text-align: center;
+        }
+
+        #walletAddress:focus {
+            border-color: #1fb592;
+            box-shadow: 0 0 0 4px rgba(31, 181, 146, 0.10);
+        }
+
+        #walletAddress::placeholder {
+            color: #aaaaaa;
+        }
+
+        button {
+            width: 100%;
+            height: 65px;
+            border: none;
+            border-radius: 16px;
+            padding: 0 24px;
+            background: #c9ff00;
+            color: #111111;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        button span {
+            margin-left: 10px;
+            font-size: 21px;
+        }
+
+        button:hover {
+            background: #b5e600;
+            transform: translateY(-1px);
+        }
+
+        .helper {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .activity-result {
+            display: none;
+            padding-bottom: 80px;
+        }
+
+        .activity-result.show {
+            display: block;
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .activity-label {
+            font-size: 11px;
+            letter-spacing: 2.5px;
+            color: #1fb592;
+            font-weight: 600;
+        }
+
+        .wallet-short {
+            font-size: 12px;
+            color: #999999;
+            font-family: monospace;
+        }
+
+        .activity-title {
+            font-size: 42px;
+            letter-spacing: -1.5px;
+            margin-bottom: 30px;
+            color: #111111;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+
+        .stat-card {
+            background: #f5f7f6;
+            border: 1px solid #e7ebe9;
+            border-radius: 15px;
+            padding: 20px 16px;
+            min-height: 130px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.2s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #1fb592;
+            transform: translateY(-2px);
+        }
+
+        .stat-card small {
+            font-size: 11px;
+            color: #888888;
+        }
+
+        .stat-card strong {
+            font-size: 21px;
+            color: #111111;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .stat-card p {
+            font-size: 10px;
+            color: #999999;
+        }
+
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 14px;
+            margin-top: 14px;
+        }
+
+        .panel {
+            background: #f5f7f6;
+            border: 1px solid #e7ebe9;
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .panel-heading {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .panel-heading h3 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .panel-heading p {
+            font-size: 11px;
+            color: #999999;
+            margin-top: 6px;
+        }
+
+        .panel-heading span {
+            color: #1fb592;
+            font-size: 18px;
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(16, 1fr);
+            gap: 5px;
+        }
+
+        .activity-cell {
+            aspect-ratio: 1;
+            border-radius: 2px;
+            background: #e5e9e7;
+        }
+
+        .activity-cell.active {
+            background: #1fb592;
+        }
+
+        .activity-cell.medium {
+            background: #83d8c3;
+        }
+
+        .streak-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .streak-item {
+            margin-bottom: 35px;
+        }
+
+        .streak-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .streak-label {
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            color: #999999;
+            text-transform: uppercase;
+        }
+
+        .streak-number {
+            font-size: 42px;
+            font-weight: 600;
+            margin-top: 8px;
+            color: #111111;
+        }
+
+        .streak-number span {
+            font-size: 13px;
+            color: #999999;
+            font-weight: 400;
+        }
+
+        @media (max-width: 900px) {
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .bottom-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                height: 82px;
+                padding: 0 20px;
+            }
+
+            .brand {
+                font-size: 14px;
+            }
+
+            .brand img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .network {
+                font-size: 10px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                min-height: 650px;
+            }
+
+            .hero::before {
+                width: 350px;
+                height: 350px;
+            }
+
+            .eyebrow {
+                font-size: 11px;
+                letter-spacing: 3px;
+            }
+
+            h1 {
+                font-size: 43px;
+                letter-spacing: -2px;
+                line-height: 1.06;
+            }
+
+            .subtitle {
+                font-size: 15px;
+                max-width: 350px;
+            }
+
+            #walletForm {
+                max-width: 100%;
+            }
+
+            #walletAddress {
+                height: 65px;
+                font-size: 14px;
+            }
+
+            button {
+                height: 65px;
+                font-size: 16px;
+            }
+
+            .activity-result {
+                padding-bottom: 50px;
+            }
+
+            .activity-header {
+                align-items: flex-start;
+                gap: 10px;
+                flex-direction: column;
+            }
+
+            .activity-title {
+                font-size: 30px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .stat-card {
+                min-height: 120px;
+                padding: 16px 13px;
+            }
+
+            .stat-card strong {
+                font-size: 17px;
+            }
+
+            .stat-card p {
+                font-size: 9px;
+            }
+
+            .panel {
+                padding: 18px;
+            }
+
+            .activity-grid {
+                grid-template-columns: repeat(12, 1fr);
+                gap: 4px;
+            }
+
+            .streak-number {
+                font-size: 34px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -26,6 +472,7 @@
     <main class="container">
 
         <section class="hero">
+
             <p class="eyebrow">ON-CHAIN EXPLORER</p>
 
             <h1>
@@ -39,6 +486,7 @@
             </p>
 
             <form id="walletForm">
+
                 <input
                     type="text"
                     id="walletAddress"
@@ -48,14 +496,15 @@
                 >
 
                 <button type="submit">
-                    Check Activity
-                    <span>→</span>
+                    Check Activity <span>→</span>
                 </button>
+
             </form>
 
             <p class="helper">
                 Enter a valid EVM wallet address to view activity.
             </p>
+
         </section>
 
 
@@ -64,7 +513,212 @@
     </main>
 
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const form = document.getElementById("walletForm");
+            const input = document.getElementById("walletAddress");
+            const result = document.getElementById("activityResult");
+
+            form.addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                const wallet = input.value.trim();
+
+                const isValidWallet = /^0x[a-fA-F0-9]{40}$/.test(wallet);
+
+                if (!isValidWallet) {
+
+                    result.classList.add("show");
+
+                    result.innerHTML = `
+                        <p style="color:#d9534f; font-size:14px; text-align:center;">
+                            Please enter a valid EVM wallet address.
+                        </p>
+                    `;
+
+                    result.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                    return;
+                }
+
+                result.classList.add("show");
+
+                result.innerHTML = `
+
+                    <div class="activity-header">
+                        <span class="activity-label">WALLET OVERVIEW</span>
+
+                        <span class="wallet-short">
+                            ${wallet.slice(0, 6)}...${wallet.slice(-4)}
+                        </span>
+                    </div>
+
+
+                    <h2 class="activity-title">Your activity</h2>
+
+
+                    <div class="stats-grid">
+
+                        <div class="stat-card">
+                            <small>First Tx</small>
+                            <strong>23 Aug<br>2025</strong>
+                            <p>First transaction</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <small>Today Streak</small>
+                            <strong>56 Days</strong>
+                            <p>Currently active streak</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <small>Longest Streak</small>
+                            <strong>575 Days</strong>
+                            <p>Personal best</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <small>Total Tx</small>
+                            <strong>565</strong>
+                            <p>Transactions completed</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <small>Total Volume</small>
+                            <strong>$566</strong>
+                            <p>Total transaction volume</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <small>NFT</small>
+                            <strong>45</strong>
+                            <p>NFT interactions</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <small>Smart Contract</small>
+                            <strong>564</strong>
+                            <p>Contract interactions</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <small>Deploy Contract</small>
+                            <strong>54</strong>
+                            <p>Contracts deployed</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <small>Active Days</small>
+                            <strong>45</strong>
+                            <p>Days with activity</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <small>Wallet Age</small>
+                            <strong>6 Months</strong>
+                            <p>Since first transaction</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="bottom-grid">
+
+                        <div class="panel">
+
+                            <div class="panel-heading">
+                                <div>
+                                    <h3>Activity overview</h3>
+                                    <p>Your on-chain activity over time</p>
+                                </div>
+
+                                <span>↗</span>
+                            </div>
+
+                            <div class="activity-grid">
+                                ${generateActivityCells()}
+                            </div>
+
+                        </div>
+
+
+                        <div class="panel streak-panel">
+
+                            <div class="panel-heading">
+                                <div>
+                                    <h3>Streaks</h3>
+                                    <p>Consistency matters.</p>
+                                </div>
+
+                                <span>↗</span>
+                            </div>
+
+                            <div>
+
+                                <div class="streak-item">
+                                    <div class="streak-label">Current Streak</div>
+
+                                    <div class="streak-number">
+                                        56 <span>days</span>
+                                    </div>
+                                </div>
+
+
+                                <div class="streak-item">
+                                    <div class="streak-label">Longest Streak</div>
+
+                                    <div class="streak-number">
+                                        575 <span>days</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                `;
+
+                result.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            });
+
+
+            function generateActivityCells() {
+
+                let cells = "";
+
+                for (let i = 0; i < 128; i++) {
+
+                    const random = Math.random();
+
+                    if (random > 0.70) {
+                        cells += `<div class="activity-cell active"></div>`;
+                    }
+
+                    else if (random > 0.48) {
+                        cells += `<div class="activity-cell medium"></div>`;
+                    }
+
+                    else {
+                        cells += `<div class="activity-cell"></div>`;
+                    }
+
+                }
+
+                return cells;
+            }
+
+        });
+    </script>
 
 </body>
 </html>
