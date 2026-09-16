@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robinhood Activity</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body><nav class="navbar">
+    <div class="logo">
+        <div class="logo-icon">R</div>
+        <span>Robinhood Activity</span>
+    </div>
+    <div class="chain-name">Robinhood Chain</div>
+</nav>
+
+<main class="hero">
+
+    <div class="badge">
+        <span class="dot"></span>
+        On-chain activity tracker
+    </div>
+
+    <h1>
+        Your on-chain<br>
+        <span>journey, visualized.</span>
+    </h1>
+
+    <p>
+        Discover your Robinhood Chain activity, streaks,
+        transactions, and wallet milestones.
+    </p>
+
+    <div class="wallet-box">
+        <input 
+            type="text" 
+            id="walletInput"
+            placeholder="Paste your EVM wallet address"
+        >
+
+        <button onclick="checkActivity()">
+            Check Activity →
+        </button>
+    </div>
+
+    <div id="error" class="error"></div>
+
+    <small>
+        Your wallet address is used only to fetch public blockchain data.
+    </small>
+
+</main>
+
+<footer>
+    Built for the Robinhood Chain community
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
