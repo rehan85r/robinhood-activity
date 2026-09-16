@@ -7,12 +7,41 @@
 }
 
 body {
-    background: #08090b;
-    color: #ffffff;
+    background: #ffffff;
+    color: #08090b;
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Blurred Robinhood Green Background Effects */
+
+.background-glow {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+    filter: blur(90px);
+    opacity: 0.18;
+}
+
+.glow-one {
+    width: 400px;
+    height: 400px;
+    background: #d4ff00;
+    top: -150px;
+    left: -100px;
+}
+
+.glow-two {
+    width: 350px;
+    height: 350px;
+    background: #baff00;
+    right: -120px;
+    top: 300px;
 }
 
 /* Navbar */
@@ -20,10 +49,14 @@ body {
 .navbar {
     width: 100%;
     padding: 22px 6%;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(0,0,0,0.07);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: blur(12px);
 }
 
 .logo {
@@ -34,20 +67,15 @@ body {
     font-size: 15px;
 }
 
-.logo-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 9px;
-    background: #1EBA98;
-    color: #08090b;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
+.logo img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    border-radius: 8px;
 }
 
 .chain-name {
-    color: rgba(255,255,255,0.4);
+    color: rgba(0,0,0,0.45);
     font-size: 13px;
 }
 
@@ -61,42 +89,45 @@ body {
     justify-content: center;
     text-align: center;
     padding: 80px 20px;
+    position: relative;
+    z-index: 1;
 }
 
 .badge {
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.65);
     padding: 8px 14px;
     border-radius: 30px;
     font-size: 12px;
-    color: rgba(255,255,255,0.5);
+    color: rgba(0,0,0,0.5);
     margin-bottom: 30px;
+    backdrop-filter: blur(10px);
 }
 
 .dot {
     display: inline-block;
     width: 7px;
     height: 7px;
-    background: #1EBA98;
+    background: #b7e900;
     border-radius: 50%;
     margin-right: 7px;
 }
 
 h1 {
-    font-size: clamp(42px, 7vw, 76px);
+    font-size: clamp(38px, 7vw, 72px);
     line-height: 1.1;
     letter-spacing: -3px;
     font-weight: 600;
 }
 
 h1 span {
-    color: rgba(255,255,255,0.38);
+    color: rgba(0,0,0,0.42);
 }
 
 .hero p {
     max-width: 440px;
     margin-top: 24px;
-    color: rgba(255,255,255,0.45);
+    color: rgba(0,0,0,0.48);
     font-size: 16px;
     line-height: 1.7;
 }
@@ -109,14 +140,17 @@ h1 span {
     max-width: 580px;
     display: flex;
     gap: 8px;
-    background: #111316;
-    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.8);
+    border: 1px solid rgba(0,0,0,0.12);
     border-radius: 15px;
     padding: 8px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+    backdrop-filter: blur(15px);
 }
 
 .wallet-box:focus-within {
-    border-color: rgba(30,186,152,0.5);
+    border-color: #b7e900;
+    box-shadow: 0 0 0 3px rgba(183,233,0,0.12);
 }
 
 .wallet-box input {
@@ -124,39 +158,41 @@ h1 span {
     background: transparent;
     border: none;
     outline: none;
-    color: white;
+    color: #08090b;
     padding: 14px;
     font-size: 14px;
     min-width: 0;
 }
 
 .wallet-box input::placeholder {
-    color: rgba(255,255,255,0.3);
+    color: rgba(0,0,0,0.35);
 }
 
 .wallet-box button {
-    background: #1EBA98;
-    color: #08090b;
+    background: #08090b;
+    color: #ffffff;
     border: none;
     border-radius: 10px;
     padding: 0 20px;
     font-weight: 600;
     cursor: pointer;
     white-space: nowrap;
+    transition: 0.2s;
 }
 
 .wallet-box button:hover {
-    background: #25d0aa;
+    background: #b7e900;
+    color: #08090b;
 }
 
 small {
     margin-top: 18px;
-    color: rgba(255,255,255,0.22);
+    color: rgba(0,0,0,0.3);
     font-size: 11px;
 }
 
 .error {
-    color: #ff6b6b;
+    color: #e5484d;
     font-size: 12px;
     margin-top: 12px;
 }
@@ -166,9 +202,11 @@ small {
 footer {
     text-align: center;
     padding: 24px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    color: rgba(255,255,255,0.25);
+    border-top: 1px solid rgba(0,0,0,0.07);
+    color: rgba(0,0,0,0.3);
     font-size: 11px;
+    position: relative;
+    z-index: 1;
 }
 
 /* Mobile */
@@ -183,12 +221,16 @@ footer {
         display: none;
     }
 
+    .logo span {
+        font-size: 13px;
+    }
+
     .hero {
         padding: 50px 20px;
     }
 
     h1 {
-        font-size: 43px;
+        font-size: 40px;
         letter-spacing: -2px;
     }
 
