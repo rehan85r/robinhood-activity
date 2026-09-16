@@ -59,7 +59,7 @@
 
         .hero {
             min-height: auto;
-            padding-top: 50px;
+            padding-top: 30px;
             padding-bottom: 100px;
             display: flex;
             flex-direction: column;
@@ -101,8 +101,6 @@
         h1 span {
             color: #111111;
         }
-
-        /* Robinhood text same as Check Activity button */
 
         h1 .robinhood-text {
             color: #c9ff00;
@@ -256,105 +254,11 @@
             color: #999999;
         }
 
-        .bottom-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 14px;
-            margin-top: 14px;
-        }
-
-        .panel {
-            background: #f5f7f6;
-            border: 1px solid #e7ebe9;
-            border-radius: 15px;
-            padding: 25px;
-        }
-
-        .panel-heading {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 25px;
-        }
-
-        .panel-heading h3 {
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .panel-heading p {
-            font-size: 11px;
-            color: #999999;
-            margin-top: 6px;
-        }
-
-        .panel-heading span {
-            color: #1fb592;
-            font-size: 18px;
-        }
-
-        .activity-grid {
-            display: grid;
-            grid-template-columns: repeat(16, 1fr);
-            gap: 5px;
-        }
-
-        .activity-cell {
-            aspect-ratio: 1;
-            border-radius: 2px;
-            background: #e5e9e7;
-        }
-
-        .activity-cell.active {
-            background: #1fb592;
-        }
-
-        .activity-cell.medium {
-            background: #83d8c3;
-        }
-
-        .streak-panel {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .streak-item {
-            margin-bottom: 35px;
-        }
-
-        .streak-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .streak-label {
-            font-size: 10px;
-            letter-spacing: 1.5px;
-            color: #999999;
-            text-transform: uppercase;
-        }
-
-        .streak-number {
-            font-size: 42px;
-            font-weight: 600;
-            margin-top: 8px;
-            color: #111111;
-        }
-
-        .streak-number span {
-            font-size: 13px;
-            color: #999999;
-            font-weight: 400;
-        }
-
         /* TABLET */
 
         @media (max-width: 900px) {
             .stats-grid {
                 grid-template-columns: repeat(3, 1fr);
-            }
-
-            .bottom-grid {
-                grid-template-columns: 1fr;
             }
         }
 
@@ -454,19 +358,6 @@
 
             .stat-card p {
                 font-size: 9px;
-            }
-
-            .panel {
-                padding: 18px;
-            }
-
-            .activity-grid {
-                grid-template-columns: repeat(12, 1fr);
-                gap: 4px;
-            }
-
-            .streak-number {
-                font-size: 34px;
             }
         }
     </style>
@@ -652,76 +543,6 @@
 
                     </div>
 
-
-                    <div class="bottom-grid">
-
-                        <div class="panel">
-
-                            <div class="panel-heading">
-
-                                <div>
-                                    <h3>Activity overview</h3>
-                                    <p>Your on-chain activity over time</p>
-                                </div>
-
-                                <span>↗</span>
-
-                            </div>
-
-
-                            <div class="activity-grid">
-                                ${generateActivityCells()}
-                            </div>
-
-                        </div>
-
-
-                        <div class="panel streak-panel">
-
-                            <div class="panel-heading">
-
-                                <div>
-                                    <h3>Streaks</h3>
-                                    <p>Consistency matters.</p>
-                                </div>
-
-                                <span>↗</span>
-
-                            </div>
-
-
-                            <div>
-
-                                <div class="streak-item">
-
-                                    <div class="streak-label">
-                                        Current Streak
-                                    </div>
-
-                                    <div class="streak-number">
-                                        56 <span>days</span>
-                                    </div>
-
-                                </div>
-
-
-                                <div class="streak-item">
-
-                                    <div class="streak-label">
-                                        Longest Streak
-                                    </div>
-
-                                    <div class="streak-number">
-                                        575 <span>days</span>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
                 `;
 
 
@@ -731,32 +552,6 @@
                 });
 
             });
-
-
-            function generateActivityCells() {
-
-                let cells = "";
-
-                for (let i = 0; i < 128; i++) {
-
-                    const random = Math.random();
-
-                    if (random > 0.70) {
-                        cells += `<div class="activity-cell active"></div>`;
-                    }
-
-                    else if (random > 0.48) {
-                        cells += `<div class="activity-cell medium"></div>`;
-                    }
-
-                    else {
-                        cells += `<div class="activity-cell"></div>`;
-                    }
-
-                }
-
-                return cells;
-            }
 
         });
 
