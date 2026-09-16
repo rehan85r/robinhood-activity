@@ -55,12 +55,15 @@
             padding: 0 24px;
         }
 
+        /* HERO SECTION */
+
         .hero {
-            min-height: 650px;
+            min-height: auto;
+            padding-top: 50px;
+            padding-bottom: 100px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             text-align: center;
             position: relative;
         }
@@ -73,7 +76,7 @@
             background: rgba(31, 181, 146, 0.13);
             filter: blur(100px);
             border-radius: 50%;
-            top: 120px;
+            top: 100px;
             left: 50%;
             transform: translateX(-50%);
             z-index: -1;
@@ -97,6 +100,12 @@
 
         h1 span {
             color: #111111;
+        }
+
+        /* Robinhood text same as Check Activity button */
+
+        h1 .robinhood-text {
+            color: #c9ff00;
         }
 
         .subtitle {
@@ -168,6 +177,8 @@
             font-size: 12px;
             color: #999999;
         }
+
+        /* ACTIVITY SECTION */
 
         .activity-result {
             display: none;
@@ -335,6 +346,8 @@
             font-weight: 400;
         }
 
+        /* TABLET */
+
         @media (max-width: 900px) {
             .stats-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -345,7 +358,10 @@
             }
         }
 
+        /* MOBILE */
+
         @media (max-width: 600px) {
+
             .navbar {
                 height: 82px;
                 padding: 0 20px;
@@ -369,7 +385,8 @@
             }
 
             .hero {
-                min-height: 650px;
+                padding-top: 60px;
+                padding-bottom: 70px;
             }
 
             .hero::before {
@@ -398,7 +415,7 @@
             }
 
             #walletAddress {
-                height: 65px;
+                height: 70px;
                 font-size: 14px;
             }
 
@@ -458,6 +475,7 @@
 <body>
 
     <header class="navbar">
+
         <div class="brand">
             <img src="robinhood-logo.png" alt="Robinhood Logo">
             <span>Robinhood Activity</span>
@@ -466,6 +484,7 @@
         <div class="network">
             Robinhood Chain
         </div>
+
     </header>
 
 
@@ -476,14 +495,15 @@
             <p class="eyebrow">ON-CHAIN EXPLORER</p>
 
             <h1>
-                Check Your Robinhood
+                Check Your <span class="robinhood-text">Robinhood</span>
                 <br>
-                <span>On-Chain Activity.</span>
+                <span>On-Chain Activity</span>
             </h1>
 
             <p class="subtitle">
                 Explore wallet activity, transaction history, streaks, and on-chain milestones.
             </p>
+
 
             <form id="walletForm">
 
@@ -501,6 +521,7 @@
 
             </form>
 
+
             <p class="helper">
                 Enter a valid EVM wallet address to view activity.
             </p>
@@ -514,11 +535,13 @@
 
 
     <script>
+
         document.addEventListener("DOMContentLoaded", () => {
 
             const form = document.getElementById("walletForm");
             const input = document.getElementById("walletAddress");
             const result = document.getElementById("activityResult");
+
 
             form.addEventListener("submit", function(event) {
 
@@ -527,6 +550,7 @@
                 const wallet = input.value.trim();
 
                 const isValidWallet = /^0x[a-fA-F0-9]{40}$/.test(wallet);
+
 
                 if (!isValidWallet) {
 
@@ -546,7 +570,9 @@
                     return;
                 }
 
+
                 result.classList.add("show");
+
 
                 result.innerHTML = `
 
@@ -632,13 +658,16 @@
                         <div class="panel">
 
                             <div class="panel-heading">
+
                                 <div>
                                     <h3>Activity overview</h3>
                                     <p>Your on-chain activity over time</p>
                                 </div>
 
                                 <span>↗</span>
+
                             </div>
+
 
                             <div class="activity-grid">
                                 ${generateActivityCells()}
@@ -650,31 +679,42 @@
                         <div class="panel streak-panel">
 
                             <div class="panel-heading">
+
                                 <div>
                                     <h3>Streaks</h3>
                                     <p>Consistency matters.</p>
                                 </div>
 
                                 <span>↗</span>
+
                             </div>
+
 
                             <div>
 
                                 <div class="streak-item">
-                                    <div class="streak-label">Current Streak</div>
+
+                                    <div class="streak-label">
+                                        Current Streak
+                                    </div>
 
                                     <div class="streak-number">
                                         56 <span>days</span>
                                     </div>
+
                                 </div>
 
 
                                 <div class="streak-item">
-                                    <div class="streak-label">Longest Streak</div>
+
+                                    <div class="streak-label">
+                                        Longest Streak
+                                    </div>
 
                                     <div class="streak-number">
                                         575 <span>days</span>
                                     </div>
+
                                 </div>
 
                             </div>
@@ -683,6 +723,7 @@
 
                     </div>
                 `;
+
 
                 result.scrollIntoView({
                     behavior: "smooth",
@@ -718,6 +759,7 @@
             }
 
         });
+
     </script>
 
 </body>
