@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #08090b;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar */
+
+.navbar {
+    width: 100%;
+    padding: 22px 6%;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    background: #1EBA98;
+    color: #08090b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.chain-name {
+    color: rgba(255,255,255,0.4);
+    font-size: 13px;
+}
+
+/* Hero */
+
+.hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.badge {
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.02);
+    padding: 8px 14px;
+    border-radius: 30px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 30px;
+}
+
+.dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: #1EBA98;
+    border-radius: 50%;
+    margin-right: 7px;
+}
+
+h1 {
+    font-size: clamp(42px, 7vw, 76px);
+    line-height: 1.1;
+    letter-spacing: -3px;
+    font-weight: 600;
+}
+
+h1 span {
+    color: rgba(255,255,255,0.38);
+}
+
+.hero p {
+    max-width: 440px;
+    margin-top: 24px;
+    color: rgba(255,255,255,0.45);
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* Wallet Input */
+
+.wallet-box {
+    margin-top: 42px;
+    width: 100%;
+    max-width: 580px;
+    display: flex;
+    gap: 8px;
+    background: #111316;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 15px;
+    padding: 8px;
+}
+
+.wallet-box:focus-within {
+    border-color: rgba(30,186,152,0.5);
+}
+
+.wallet-box input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px;
+    font-size: 14px;
+    min-width: 0;
+}
+
+.wallet-box input::placeholder {
+    color: rgba(255,255,255,0.3);
+}
+
+.wallet-box button {
+    background: #1EBA98;
+    color: #08090b;
+    border: none;
+    border-radius: 10px;
+    padding: 0 20px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.wallet-box button:hover {
+    background: #25d0aa;
+}
+
+small {
+    margin-top: 18px;
+    color: rgba(255,255,255,0.22);
+    font-size: 11px;
+}
+
+.error {
+    color: #ff6b6b;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+/* Footer */
+
+footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.25);
+    font-size: 11px;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .navbar {
+        padding: 18px 20px;
+    }
+
+    .chain-name {
+        display: none;
+    }
+
+    .hero {
+        padding: 50px 20px;
+    }
+
+    h1 {
+        font-size: 43px;
+        letter-spacing: -2px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .wallet-box {
+        flex-direction: column;
+        padding: 8px;
+    }
+
+    .wallet-box button {
+        width: 100%;
+        padding: 14px;
+    }
+
+    .wallet-box input {
+        padding: 14px 10px;
+    }
+
+}
