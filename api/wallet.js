@@ -27,7 +27,6 @@ export default async function handler(req, res) {
             fromAddress: address,
             category: [
               "external",
-              "internal",
               "erc20",
               "erc721",
               "erc1155"
@@ -99,7 +98,6 @@ export default async function handler(req, res) {
 
     const contractInteractions = uniqueTransactions.filter(
       (tx) =>
-        tx.category === "internal" ||
         tx.category === "erc20" ||
         tx.category === "erc721" ||
         tx.category === "erc1155"
